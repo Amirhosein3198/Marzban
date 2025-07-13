@@ -26,7 +26,7 @@ import { useState, useEffect } from 'react'
 import { Loader2, Settings, RefreshCw, Activity, RotateCcw, Wifi } from 'lucide-react'
 import { v4 as uuidv4, v5 as uuidv5, v6 as uuidv6, v7 as uuidv7 } from 'uuid'
 import { LoaderButton } from '../ui/loader-button'
-import useDynamicErrorHandler from "@/hooks/use-dynamic-errors.ts";
+import useDynamicErrorHandler from "@/hooks/use-dynamic-errors";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import UserOnlineStatsDialog from './UserOnlineStatsModal'
 

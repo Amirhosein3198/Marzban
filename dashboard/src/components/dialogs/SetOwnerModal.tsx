@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
+import { LoaderButton } from '@/components/ui/loader-button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Loader2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -118,10 +119,15 @@ export default function SetOwnerModal({ open, onClose, username, currentOwner, o
             <Button type="button" variant="outline" onClick={onClose} disabled={submitting}>
               {t('cancel', { defaultValue: 'Cancel' })}
             </Button>
-            <Button type="button" onClick={handleSubmit} disabled={!selectedAdmin || submitting}>
-              {submitting && <Loader2 className="animate-spin mr-2 h-4 w-4" />}
+            <LoaderButton 
+              type="button" 
+              onClick={handleSubmit} 
+              disabled={!selectedAdmin || submitting}
+              isLoading={submitting}
+              loadingText={t('modifying', { defaultValue: 'Modifying...' })}
+            >
               {t('setOwnerModal.confirm', { defaultValue: 'Set Owner' })}
-            </Button>
+            </LoaderButton>
           </div>
         </div>
       </DialogContent>

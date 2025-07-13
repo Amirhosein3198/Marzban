@@ -1355,5 +1355,77 @@
   },
   "inboundTags": "入站标签",
   "searchInbounds": "搜索入站...",
-  "noInboundsFound": "未找到入站"
+  "noInboundsFound": "未找到入站",
+  "bulk": {
+    "title": "批量操作",
+    "description": "对多个用户和组执行批量操作",
+    "groups": {
+      "title": "组操作",
+      "description": "向多个用户添加或删除组",
+      "addGroups": "向用户添加组",
+      "removeGroups": "从用户删除组",
+      "selectGroups": "选择组",
+      "selectUsers": "选择用户",
+      "selectAdmins": "选择管理员",
+      "addSuccess": "组已成功添加到用户",
+      "addFailed": "向用户添加组失败",
+      "removeSuccess": "组已成功从用户删除",
+      "removeFailed": "从用户删除组失败"
+    },
+    "users": {
+      "title": "用户操作",
+      "description": "修改多个用户的设置",
+      "expire": {
+        "title": "修改到期时间",
+        "description": "向用户的到期日期添加或减去时间",
+        "amount": "数量（秒）",
+        "amountPlaceholder": "输入秒数",
+        "addTime": "添加时间",
+        "subtractTime": "减去时间",
+        "success": "用户到期时间修改成功",
+        "failed": "修改用户到期时间失败"
+      },
+      "dataLimit": {
+        "title": "修改数据限制",
+        "description": "向用户的数据限制添加或减去数据",
+        "amount": "数量（字节）",
+        "amountPlaceholder": "输入字节数",
+        "addData": "添加数据",
+        "subtractData": "减去数据",
+        "success": "用户数据限制修改成功",
+        "failed": "修改用户数据限制失败"
+      },
+      "proxySettings": {
+        "title": "修改代理设置",
+        "description": "更新多个用户的代理设置",
+        "flow": "流",
+        "method": "方法",
+        "groupIds": "组ID",
+        "success": "用户代理设置修改成功",
+        "failed": "修改用户代理设置失败"
+      }
+    },
+    "common": {
+      "selectAll": "全选",
+      "deselectAll": "取消全选",
+      "apply": "应用",
+      "cancel": "取消",
+      "loading": "处理中...",
+      "noSelection": "请至少选择一个项目",
+      "confirmAction": "确认操作",
+      "confirmDescription": "您确定要执行此批量操作吗？此操作无法撤销。",
+      "groups": "组",
+      "targets": "目标",
+      "selected": "已选择",
+      "operation": "操作",
+      "searchGroups": "搜索组...",
+      "searchUsers": "搜索用户...",
+      "searchAdmins": "搜索管理员...",
+      "noGroupsFound": "未找到组",
+      "noUsersFound": "未找到用户",
+      "noAdminsFound": "未找到管理员",
+      "selectFlow": "选择流",
+      "selectMethod": "选择方法"
+    }
+  }
 }

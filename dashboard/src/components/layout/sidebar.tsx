@@ -32,6 +32,7 @@ import {
   Users2,
   UsersIcon,
   Webhook,
+  Layers,
 } from 'lucide-react'
 import * as React from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -138,6 +139,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               title: 'groups',
               url: '/groups',
               icon: Users2,
+            },
+            {
+              title: 'bulk.title',
+              url: '/bulk',
+              icon: Layers,
             },
             {
               title: 'templates.title',

@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { LoaderButton } from '@/components/ui/loader-button'
 import useDirDetection from '@/hooks/use-dir-detection'
 import { cn } from '@/lib/utils'
 import {getHosts, getInbounds, UserStatus} from '@/service/api'
@@ -2542,7 +2543,13 @@ const HostModal: React.FC<HostModalProps> = ({ isDialogOpen, onOpenChange, onSub
               <Button type="button" variant="outline" onClick={() => handleModalOpenChange(false)}>
                 {t('cancel')}
               </Button>
-              <Button type="submit" disabled={isSubmitting}>{editingHost ? t('edit') : t('create')}</Button>
+              <LoaderButton 
+                type="submit" 
+                isLoading={isSubmitting}
+                loadingText={editingHost ? t('modifying') : t('creating')}
+              >
+                {editingHost ? t('edit') : t('create')}
+              </LoaderButton>
             </div>
           </form>
         </Form>

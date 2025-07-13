@@ -21,7 +21,7 @@ import {useTranslation} from 'react-i18next'
 import {toast} from 'sonner'
 import {z} from 'zod'
 import {useTheme} from '../../components/theme-provider'
-import {isEmptyObject} from "@/utils/isEmptyObject.ts";
+import {isEmptyObject} from "@/utils/isEmptyObject";
 
 export const coreConfigFormSchema = z.object({
     name: z.string().min(1, 'Name is required'),

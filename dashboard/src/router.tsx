@@ -5,6 +5,9 @@ import { createHashRouter, RouteObject } from 'react-router'
 import DashboardLayout from './pages/_dashboard'
 import Dashboard from './pages/_dashboard._index'
 import AdminsPage from './pages/_dashboard.admins'
+import BulkOperations from './pages/_dashboard.bulk._index'
+import BulkGroups from './pages/_dashboard.bulk.groups'
+import BulkUsers from './pages/_dashboard.bulk.users'
 import Groups from './pages/_dashboard.groups'
 import Hosts from './pages/_dashboard.hosts'
 import Nodes from './pages/_dashboard.nodes'
@@ -88,6 +91,21 @@ export const router = createHashRouter([
       {
         path: '/groups',
         element: <Groups />,
+      },
+      {
+        path: '/bulk',
+        element: <BulkOperations />,
+        children: [
+          {
+            path: '/bulk',
+            index: true,
+            element: <BulkGroups />,
+          },
+          {
+            path: '/bulk/users',
+            element: <BulkUsers />,
+          },
+        ],
       },
       {
         path: '/templates',

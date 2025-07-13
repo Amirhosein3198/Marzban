@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
+import { LoaderButton } from '@/components/ui/loader-button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -533,21 +534,23 @@ export default function UserOnlineStatsModal({
                             />
                         </div>
                         <div className="flex gap-2">
-                            <Button 
+                            <LoaderButton 
                                 onClick={handleSearch}
                                 disabled={!searchTerm.trim() || isLoadingUserStats}
+                                isLoading={isLoadingUserStats}
                                 className="flex-1 sm:flex-none"
                             >
                                 <Search className="h-4 w-4" />
-                            </Button>
-                            <Button 
+                            </LoaderButton>
+                            <LoaderButton 
                                 variant="outline" 
                                 onClick={handleRefresh}
                                 disabled={refreshing || (!specificUsername && !viewingIPs)}
+                                isLoading={refreshing}
                                 className="flex-1 sm:flex-none"
                             >
-                                <RefreshCw className={cn('h-4 w-4', refreshing && 'animate-spin')} />
-                            </Button>
+                                <RefreshCw className="h-4 w-4" />
+                            </LoaderButton>
                         </div>
                     </div>
                 )}

@@ -1355,5 +1355,78 @@
     "success": "User {{username}}'s owner changed to {{admin}} successfully.",
     "error": "Failed to change owner of user {{username}} to {{admin}}.",
     "loadError": "Failed to load admins."
+  },
+  "bulk": {
+    "title": "Bulk Operations",
+    "description": "Perform bulk operations on multiple users and groups",
+    "groups": {
+      "title": "Group Operations",
+      "description": "Add or remove groups from multiple users",
+      "addGroups": "Add Groups to Users",
+      "removeGroups": "Remove Groups from Users",
+      "selectGroups": "Select Groups",
+      "selectUsers": "Select Users",
+      "selectAdmins": "Select Admins",
+      "addSuccess": "Groups added to users successfully",
+      "addFailed": "Failed to add groups to users",
+      "removeSuccess": "Groups removed from users successfully",
+      "removeFailed": "Failed to remove groups from users"
+    },
+    "users": {
+      "title": "User Operations",
+      "description": "Modify multiple users' settings",
+      "expire": {
+        "title": "Modify Expiration",
+        "description": "Add or subtract time from users' expiration dates",
+        "amount": "Amount (seconds)",
+        "amountPlaceholder": "Enter amount in seconds",
+        "addTime": "Add Time",
+        "subtractTime": "Subtract Time",
+        "success": "User expiration times modified successfully",
+        "failed": "Failed to modify user expiration times"
+      },
+      "dataLimit": {
+        "title": "Modify Data Limits",
+        "description": "Add or subtract data from users' data limits",
+        "amount": "Amount (bytes)",
+        "amountPlaceholder": "Enter amount in bytes",
+        "addData": "Add Data",
+        "subtractData": "Subtract Data",
+        "success": "User data limits modified successfully",
+        "failed": "Failed to modify user data limits"
+      },
+      "proxySettings": {
+        "title": "Modify Proxy Settings",
+        "description": "Update proxy settings for multiple users",
+        "flow": "Flow",
+        "method": "Method",
+        "groupIds": "Group IDs",
+        "success": "User proxy settings modified successfully",
+        "failed": "Failed to modify user proxy settings"
+      }
+    },
+    "common": {
+      "selectAll": "Select All",
+      "deselectAll": "Deselect All",
+      "apply": "Apply",
+      "cancel": "Cancel",
+      "loading": "Processing...",
+      "noSelection": "Please select at least one item",
+      "confirmAction": "Confirm Action",
+      "confirmDescription": "Are you sure you want to perform this bulk operation? This action cannot be undone.",
+      "beta": "Beta",
+      "groups": "groups",
+      "targets": "targets",
+      "selected": "selected",
+      "operation": "Operation",
+      "searchGroups": "Search groups...",
+      "searchUsers": "Search users...",
+      "searchAdmins": "Search admins...",
+      "noGroupsFound": "No groups found",
+      "noUsersFound": "No users found",
+      "noAdminsFound": "No admins found",
+      "selectFlow": "Select flow",
+      "selectMethod": "Select method"
+    }
   }
 }

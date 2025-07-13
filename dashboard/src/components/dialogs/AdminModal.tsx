@@ -8,9 +8,9 @@ import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import { useCreateAdmin, useModifyAdmin } from '@/service/api'
 import { toast } from 'sonner'
-import { queryClient } from '@/utils/query-client.ts'
+import { queryClient } from '@/utils/query-client'
 import { PasswordInput } from '@/components/ui/password-input'
-import useDynamicErrorHandler from "@/hooks/use-dynamic-errors.ts";
+import useDynamicErrorHandler from "@/hooks/use-dynamic-errors";
 import { LoaderButton } from '@/components/ui/loader-button'
 import useDirDetection from '@/hooks/use-dir-detection'
 

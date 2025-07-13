@@ -2,6 +2,7 @@ import {Dialog, DialogContent, DialogHeader, DialogTitle} from '@/components/ui/
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/form'
 import {Input} from '@/components/ui/input'
 import {Button} from '@/components/ui/button'
+import { LoaderButton } from '@/components/ui/loader-button'
 import {useTranslation} from 'react-i18next'
 import {UseFormReturn} from 'react-hook-form'
 import {useCreateGroup, useModifyGroup, useGetInbounds} from '@/service/api'
@@ -13,7 +14,7 @@ import {X} from 'lucide-react'
 import {cn} from '@/lib/utils'
 import {queryClient} from '@/utils/query-client'
 import useDirDetection from '@/hooks/use-dir-detection'
-import useDynamicErrorHandler from "@/hooks/use-dynamic-errors.ts";
+import useDynamicErrorHandler from "@/hooks/use-dynamic-errors";
 
 export const groupFormSchema = z.object({
     name: z.string().min(1, 'Name is required'),
@@ -143,10 +144,13 @@ export default function GroupModal({isDialogOpen, onOpenChange, form, editingGro
                             <Button variant="outline" onClick={() => onOpenChange(false)}>
                                 {t('cancel')}
                             </Button>
-                            <Button type="submit" disabled={addGroupMutation.isPending || modifyGroupMutation.isPending}
-                                    className="bg-primary hover:bg-primary/90">
+                            <LoaderButton
+                                type="submit"
+                                isLoading={addGroupMutation.isPending || modifyGroupMutation.isPending}
+                                loadingText={editingGroup ? t('modifying') : t('creating')}
+                                className="bg-primary hover:bg-primary/90">
                                 {editingGroup ? t('edit') : t('create')}
-                            </Button>
+                            </LoaderButton>
                         </div>
                     </form>
                 </Form>
