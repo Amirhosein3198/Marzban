@@ -1,6 +1,5 @@
 import { Footer } from '@/components/Footer'
 import { AppSidebar } from '@/components/layout/sidebar'
-import PageTransition from '@/components/PageTransition'
 import RouteGuard from '@/components/RouteGuard'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { getCurrentAdmin } from '@/service/api'
@@ -22,9 +21,7 @@ export default function DashboardLayout() {
         <div className="w-full flex flex-col lg:flex-row">
           <AppSidebar />
           <div className="flex flex-col justify-between min-h-screen gap-y-4 w-full">
-            <PageTransition duration={450}>
               <Outlet />
-            </PageTransition>
             <Footer />
           </div>
         </div>

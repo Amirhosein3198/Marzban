@@ -1,5 +1,4 @@
 import PageHeader from '@/components/page-header'
-import PageTransition from '@/components/PageTransition'
 import { ArrowUpDown, Calendar, Lock, Users2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -64,9 +63,7 @@ const BulkPage = () => {
 
   return (
     <div className="flex w-full flex-col items-start gap-0">
-      <PageTransition isContentTransition={true}>
         <PageHeader {...getPageHeaderProps()} />
-      </PageTransition>
       <div className="w-full">
         <div className="scrollbar-hide flex overflow-x-auto border-b px-4">
           {tabs.map(tab => (
@@ -83,9 +80,7 @@ const BulkPage = () => {
           ))}
         </div>
         <div className="px-4">
-          <PageTransition isContentTransition={true}>
             <Outlet />
-          </PageTransition>
         </div>
       </div>
     </div>

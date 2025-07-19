@@ -1,6 +1,5 @@
 import PageHeader from '@/components/page-header'
-import PageTransition from '@/components/PageTransition'
-import { Cpu, LucideIcon, Share2, Plus, FileText } from 'lucide-react'
+import { Cpu, FileText, LucideIcon, Plus, Share2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Outlet, useLocation, useNavigate } from 'react-router'
@@ -69,9 +68,7 @@ const Settings = () => {
 
   return (
     <div className="flex flex-col gap-0 w-full items-start">
-      <PageTransition isContentTransition={true}>
         <PageHeader {...getPageHeaderProps()} />
-      </PageTransition>
       <div className="w-full">
         <div className="flex border-b px-4">
           {tabs.map(tab => (
@@ -90,9 +87,7 @@ const Settings = () => {
           ))}
         </div>
         <div className="px-4">
-          <PageTransition isContentTransition={true}>
             <Outlet />
-          </PageTransition>
         </div>
       </div>
     </div>
