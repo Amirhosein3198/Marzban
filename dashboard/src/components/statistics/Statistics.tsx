@@ -2,10 +2,10 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { NodeRealtimeStats, SystemStats, useGetNodes, useRealtimeNodeStats } from '@/service/api'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { AreaCostumeChart } from '../charts/AreaCostumeChart'
 import { CostumeBarChart } from '../charts/CostumeBarChart'
 import { EmptyState } from '../charts/EmptyState'
 import SystemStatisticsSection from './SystemStatisticsSection'
-import { AreaCostumeChart } from '../charts/AreaCostumeChart'
 
 interface StatisticsProps {
   data?: SystemStats
@@ -81,7 +81,7 @@ export default function Statistics({ data, isLoading, error, selectedServer, is_
             <p className="text-sm">{t('monitorServers')}</p>
           </div>
         </div>
-        <div className="transform-gpu animate-slide-up" style={{ animationDuration: '500ms', animationDelay: '100ms', animationFillMode: 'both' }}>
+        <div className="transform-gpu " style={{ animationDuration: '500ms', animationDelay: '100ms', animationFillMode: 'both' }}>
           <SystemStatisticsSection currentStats={currentStats} />
         </div>
       </div>
@@ -89,11 +89,11 @@ export default function Statistics({ data, isLoading, error, selectedServer, is_
       {/* Charts Section - only show for sudo admins */}
       <div className="space-y-8">
         {is_sudo && (
-          <div className="transform-gpu animate-slide-up" style={{ animationDuration: '500ms', animationDelay: '200ms', animationFillMode: 'both' }}>
+          <div className="transform-gpu " style={{ animationDuration: '500ms', animationDelay: '200ms', animationFillMode: 'both' }}>
             <CostumeBarChart nodeId={selectedNodeId} />
           </div>
         )}
-        <div className="transform-gpu animate-slide-up" style={{ animationDuration: '500ms', animationDelay: '300ms', animationFillMode: 'both' }}>
+        <div className="transform-gpu " style={{ animationDuration: '500ms', animationDelay: '300ms', animationFillMode: 'both' }}>
           <AreaCostumeChart nodeId={selectedNodeId} currentStats={currentStats} realtimeStats={actualSelectedServer === 'master' ? data : nodeStats || undefined} />
         </div>
       </div>

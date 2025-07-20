@@ -64,7 +64,7 @@ const UsersStatistics = () => {
     <div className="flex flex-col gap-y-4">
       <div className={cn('flex flex-col lg:flex-row items-center justify-between gap-x-4 gap-y-4', dir === 'rtl' && 'lg:flex-row-reverse')}>
         {/* Online Users */}
-        <div className="w-full animate-fade-in" style={{ animationDuration: '600ms', animationDelay: '50ms' }}>
+        <div className="w-full" style={{ animationDuration: '600ms', animationDelay: '50ms' }}>
           <Card dir={dir} className="py-6 px-4 w-full rounded-md transition-all duration-500 overflow-hidden relative group">
             <div
               className={cn(
@@ -76,7 +76,7 @@ const UsersStatistics = () => {
             <CardTitle className="flex items-center justify-between gap-x-4 relative z-10">
               <div className="flex items-center gap-x-4">
                 <div className="min-h-[10px] min-w-[10px] rounded-full bg-green-300 dark:bg-green-500 shadow-sm animate-pulse" style={{ animationDuration: '3s' }} />
-                <span className="">{t('statistics.onlineUsers')}</span>
+                <span>{t('statistics.onlineUsers')}</span>
               </div>
               <span className={cn('text-3xl mx-2 transition-all duration-500', isIncreased.online_users ? 'animate-zoom-out' : '')} style={{ animationDuration: '400ms' }}>
                 {data ? <CountUp end={data.online_users} /> : 0}
@@ -85,7 +85,7 @@ const UsersStatistics = () => {
           </Card>
         </div>
 
-        <div className="w-full animate-fade-in" style={{ animationDuration: '600ms', animationDelay: '150ms' }}>
+        <div className="w-full" style={{ animationDuration: '600ms', animationDelay: '150ms' }}>
           <Card dir={dir} className="py-6 px-4 w-full rounded-md transition-all duration-500 overflow-hidden relative group">
             <div
               className={cn(
@@ -97,7 +97,7 @@ const UsersStatistics = () => {
             <CardTitle className="flex items-center justify-between gap-x-4 relative z-10">
               <div className="flex items-center gap-x-4">
                 <Wifi className="h-5 w-5" />
-                <span className="">{t('statistics.activeUsers')}</span>
+                <span>{t('statistics.activeUsers')}</span>
               </div>
               <span className={cn('text-3xl mx-2 transition-all duration-500', isIncreased.active_users ? 'animate-zoom-out' : '')} style={{ animationDuration: '400ms' }}>
                 {data ? <CountUp end={data.active_users} /> : 0}
@@ -106,7 +106,7 @@ const UsersStatistics = () => {
           </Card>
         </div>
 
-        <div className="w-full animate-fade-in" style={{ animationDuration: '600ms', animationDelay: '250ms' }}>
+        <div className="w-full " style={{ animationDuration: '600ms', animationDelay: '250ms' }}>
           <Card dir={dir} className="py-6 px-4 w-full rounded-md transition-all duration-500 overflow-hidden relative group">
             <div
               className={cn(
@@ -118,7 +118,7 @@ const UsersStatistics = () => {
             <CardTitle className="flex items-center justify-between gap-x-4 relative z-10">
               <div className="flex items-center gap-x-4">
                 <Users className="h-5 w-5" />
-                <span className="">{t('statistics.users')}</span>
+                <span>{t('statistics.users')}</span>
               </div>
               <span className={cn('text-3xl mx-2 transition-all duration-500', isIncreased.total_user ? 'animate-zoom-out' : '')} style={{ animationDuration: '400ms' }}>
                 {data ? <CountUp end={data.total_user} /> : 0}

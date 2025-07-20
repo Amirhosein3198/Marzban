@@ -2,7 +2,7 @@ import useDirDetection from '@/hooks/use-dir-detection'
 import { cn } from '@/lib/utils'
 import { SystemStats } from '@/service/api'
 import { formatBytes } from '@/utils/formatByte'
-import { Cpu, MemoryStick, Database, Users, TrendingUp, TrendingDown } from 'lucide-react'
+import { Cpu, Database, MemoryStick, TrendingDown, TrendingUp, Users } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Card, CardContent } from '../ui/card'
@@ -45,35 +45,35 @@ const DashboardStatistics = ({ systemData }: { systemData: SystemStats | undefin
 
   const getTotalTrafficValue = () => {
     if (!systemData) return 0
-    
+
     // For master server stats - use total traffic
     return Number(systemData.incoming_bandwidth) + Number(systemData.outgoing_bandwidth)
   }
 
   const getMemoryUsage = () => {
     if (!systemData) return { used: 0, total: 0, percentage: 0 }
-    
+
     const memUsed = Number(systemData.mem_used) || 0
     const memTotal = Number(systemData.mem_total) || 0
     const percentage = memTotal > 0 ? (memUsed / memTotal) * 100 : 0
-    
+
     return { used: memUsed, total: memTotal, percentage }
   }
 
   const getCpuInfo = () => {
     if (!systemData) return { usage: 0, cores: 0 }
-    
+
     let cpuUsage = Number(systemData.cpu_usage) || 0
     const cpuCores = Number(systemData.cpu_cores) || 0
-    
+
     // Fix potential decimal issue - if usage is between 0-1, it's likely a decimal representation
     if (cpuUsage > 0 && cpuUsage <= 1) {
       cpuUsage = cpuUsage * 100
     }
-    
+
     // Ensure CPU usage doesn't exceed 100% and is reasonable
     cpuUsage = Math.min(Math.max(cpuUsage, 0), 100)
-    
+
     return { usage: Math.round(cpuUsage * 10) / 10, cores: cpuCores } // Round to 1 decimal place
   }
 
@@ -107,7 +107,7 @@ const DashboardStatistics = ({ systemData }: { systemData: SystemStats | undefin
       dir === 'rtl' && 'lg:grid-flow-col-reverse'
     )}>
       {/* CPU Usage */}
-      <div className="w-full h-full animate-fade-in" style={{ animationDuration: '600ms', animationDelay: '50ms' }}>
+      <div className="w-full h-full " style={{ animationDuration: '600ms', animationDelay: '50ms' }}>
         <Card dir={dir} className="group relative w-full h-full overflow-hidden rounded-lg border transition-all duration-300 hover:shadow-lg">
           <div
             className={cn(
@@ -127,7 +127,7 @@ const DashboardStatistics = ({ systemData }: { systemData: SystemStats | undefin
                 </div>
               </div>
             </div>
-            
+
             <div className="flex items-end justify-between gap-2">
               <div className="flex items-center gap-1 sm:gap-2 min-w-0 flex-1">
                 <span dir="ltr" className={cn('text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-500 truncate', isIncreased.cpu_usage ? 'animate-zoom-out' : '')} style={{ animationDuration: '400ms' }}>
@@ -139,7 +139,7 @@ const DashboardStatistics = ({ systemData }: { systemData: SystemStats | undefin
                   </div>
                 )}
               </div>
-              
+
               {cpu.cores > 0 && (
                 <div className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground bg-muted/50 px-1.5 sm:px-2 py-1 rounded-md shrink-0">
                   <Cpu className="h-3 w-3" />
@@ -154,7 +154,7 @@ const DashboardStatistics = ({ systemData }: { systemData: SystemStats | undefin
       </div>
 
       {/* Memory Usage */}
-      <div className="w-full h-full animate-fade-in" style={{ animationDuration: '600ms', animationDelay: '150ms' }}>
+      <div className="w-full h-full " style={{ animationDuration: '600ms', animationDelay: '150ms' }}>
         <Card dir={dir} className="group relative w-full h-full overflow-hidden rounded-lg border transition-all duration-300 hover:shadow-lg">
           <div
             className={cn(
@@ -174,7 +174,7 @@ const DashboardStatistics = ({ systemData }: { systemData: SystemStats | undefin
                 </div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-1 sm:gap-2">
               <span dir="ltr" className={cn('text-lg sm:text-xl lg:text-2xl font-bold transition-all duration-500 truncate', isIncreased.mem_usage ? 'animate-zoom-out' : '')} style={{ animationDuration: '400ms' }}>
                 {systemData ? (
@@ -196,7 +196,7 @@ const DashboardStatistics = ({ systemData }: { systemData: SystemStats | undefin
       </div>
 
       {/* Total Traffic */}
-      <div className="w-full h-full animate-fade-in" style={{ animationDuration: '600ms', animationDelay: '250ms' }}>
+      <div className="w-full h-full " style={{ animationDuration: '600ms', animationDelay: '250ms' }}>
         <Card dir={dir} className="group relative w-full h-full overflow-hidden rounded-lg border transition-all duration-300 hover:shadow-lg">
           <div
             className={cn(
@@ -216,7 +216,7 @@ const DashboardStatistics = ({ systemData }: { systemData: SystemStats | undefin
                 </div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-1 sm:gap-2">
               <span dir="ltr" className={cn('text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-500 truncate', isIncreased.total_traffic ? 'animate-zoom-out' : '')} style={{ animationDuration: '400ms' }}>
                 {formatBytes(getTotalTrafficValue() || 0, 1)}
@@ -232,7 +232,7 @@ const DashboardStatistics = ({ systemData }: { systemData: SystemStats | undefin
       </div>
 
       {/* Online Users */}
-      <div className="w-full h-full animate-fade-in" style={{ animationDuration: '600ms', animationDelay: '350ms' }}>
+      <div className="w-full h-full " style={{ animationDuration: '600ms', animationDelay: '350ms' }}>
         <Card dir={dir} className="group relative w-full h-full overflow-hidden rounded-lg border transition-all duration-300 hover:shadow-lg">
           <div
             className={cn(
@@ -252,7 +252,7 @@ const DashboardStatistics = ({ systemData }: { systemData: SystemStats | undefin
                 </div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-1 sm:gap-2">
               <span dir="ltr" className={cn('text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-500', isIncreased.online_users ? 'animate-zoom-out' : '')} style={{ animationDuration: '400ms' }}>
                 <CountUp end={systemData?.online_users || 0} />

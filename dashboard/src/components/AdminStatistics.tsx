@@ -1,11 +1,11 @@
+import { Card, CardTitle } from '@/components/ui/card'
 import useDirDetection from '@/hooks/use-dir-detection'
 import { cn } from '@/lib/utils.ts'
-import { numberWithCommas } from '@/utils/formatByte'
-import { useTranslation } from 'react-i18next'
-import { Card, CardTitle } from '@/components/ui/card'
 import { type AdminDetails } from '@/service/api'
+import { numberWithCommas } from '@/utils/formatByte'
 import { User, UserCheck, UserX } from 'lucide-react'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface AdminsStatisticsProps {
   data: AdminDetails[]
@@ -46,7 +46,7 @@ export default function AdminStatisticsSection({ data }: AdminsStatisticsProps) 
           key={stat.label}
           dir={dir}
           className={cn(
-            "group relative w-full animate-fade-in rounded-md transition-all duration-300 hover:shadow-lg",
+            "group relative w-full  rounded-md transition-all duration-300 hover:shadow-lg",
           )}
           style={{
             animationDuration: '600ms',

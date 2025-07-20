@@ -1,17 +1,17 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { SystemStats } from '@/service/api'
-import { useTranslation } from 'react-i18next'
-import { 
-  Users, 
-  Activity, 
-  UserX,
-  UserMinus,
-  Clock,
-  Ban
-} from 'lucide-react'
-import { cn } from '@/lib/utils'
 import useDirDetection from '@/hooks/use-dir-detection'
+import { cn } from '@/lib/utils'
+import { SystemStats } from '@/service/api'
 import { numberWithCommas } from '@/utils/formatByte'
+import {
+    Activity,
+    Ban,
+    Clock,
+    UserMinus,
+    Users,
+    UserX
+} from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 interface UserStatisticsSectionProps {
   data?: SystemStats
@@ -72,9 +72,9 @@ export default function UserStatisticsSection({ data }: UserStatisticsSectionPro
         {userStats.map((stat, index) => (
           <div
             key={stat.key}
-            className="w-full animate-fade-in"
-            style={{ 
-              animationDuration: '600ms', 
+            className="w-full "
+            style={{
+              animationDuration: '600ms',
               animationDelay: `${(index + 1) * 100}ms`,
               animationFillMode: 'both'
             }}
@@ -118,4 +118,4 @@ export default function UserStatisticsSection({ data }: UserStatisticsSectionPro
       </CardContent>
     </Card>
   )
-} 
+}

@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Plus } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import AdminsTable from '@/components/admins/AdminsTable'
+import AdminsStatistics from '@/components/AdminStatistics.tsx'
+import AdminModal, { adminFormSchema, AdminFormValues } from '@/components/dialogs/AdminModal'
 import PageHeader from '@/components/page-header'
 import { Separator } from '@/components/ui/separator'
-import { toast } from 'sonner'
-import AdminsTable from '@/components/admins/AdminsTable'
-import AdminModal, { adminFormSchema, AdminFormValues } from '@/components/dialogs/AdminModal'
-import { useActivateAllDisabledUsers, useDisableAllActiveUsers, useGetAdmins, useModifyAdmin, useRemoveAdmin, useResetAdminUsage } from '@/service/api'
 import type { AdminDetails } from '@/service/api'
-import AdminsStatistics from '@/components/AdminStatistics.tsx'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useActivateAllDisabledUsers, useDisableAllActiveUsers, useGetAdmins, useModifyAdmin, useRemoveAdmin, useResetAdminUsage } from '@/service/api'
 import { queryClient } from '@/utils/query-client.ts'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Plus } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 
 const initialDefaultValues: Partial<AdminFormValues> = {
   username: '',
@@ -160,17 +160,17 @@ export default function AdminsPage() {
 
   return (
     <div className="flex flex-col gap-2 w-full items-start">
-      <div className="w-full transform-gpu animate-fade-in" style={{ animationDuration: '400ms' }}>
+      <div className="w-full" style={{ animationDuration: '400ms' }}>
         <PageHeader title="admins.title" description="admins.description" buttonIcon={Plus} buttonText="admins.createAdmin" onButtonClick={() => setIsDialogOpen(true)} />
         <Separator />
       </div>
 
       <div className="px-4 w-full pt-2">
-        <div className="transform-gpu animate-slide-up mb-6" style={{ animationDuration: '500ms', animationDelay: '100ms', animationFillMode: 'both' }}>
+        <div className="mb-6" style={{ animationDuration: '500ms', animationDelay: '100ms', animationFillMode: 'both' }}>
           <AdminsStatistics data={admins} />
         </div>
 
-        <div className="transform-gpu animate-slide-up" style={{ animationDuration: '500ms', animationDelay: '250ms', animationFillMode: 'both' }}>
+        <div style={{ animationDuration: '500ms', animationDelay: '250ms', animationFillMode: 'both' }}>
           <AdminsTable data={admins} onEdit={handleEdit} onDelete={handleDelete} onToggleStatus={handleToggleStatus} onResetUsage={resetUsage} />
         </div>
 

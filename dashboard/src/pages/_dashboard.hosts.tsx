@@ -1,24 +1,23 @@
+import MainSection, { HostFormValues } from '@/components/hosts/Hosts'
 import PageHeader from '@/components/page-header'
-import {Plus} from 'lucide-react'
-import MainSection from '@/components/hosts/Hosts'
-import {useState} from 'react'
-import {useQuery, useQueryClient} from '@tanstack/react-query'
+import { Card, CardContent } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 import {
-    getHosts,
-    createHost,
-    modifyHost,
-    CreateHost,
-    ProxyHostALPN,
-    ProxyHostFingerprint,
-    MultiplexProtocol,
-    Xudp,
-    BaseHost
+	BaseHost,
+	createHost,
+	CreateHost,
+	getHosts,
+	modifyHost,
+	MultiplexProtocol,
+	ProxyHostALPN,
+	ProxyHostFingerprint,
+	Xudp
 } from '@/service/api'
-import {HostFormValues} from '@/components/hosts/Hosts'
-import {toast} from 'sonner'
-import {useTranslation} from 'react-i18next'
-import {Separator} from '@/components/ui/separator'
-import {Card, CardContent} from '@/components/ui/card'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { Plus } from 'lucide-react'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 
 export default function HostsPage() {
     const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -165,8 +164,8 @@ export default function HostsPage() {
                         // Get first error message from object
                         const firstError = Object.entries(apiError.detail)[0]
                         errorField = firstError[0]
-                        errorMessage = typeof firstError[1] === 'string' 
-                            ? firstError[1] 
+                        errorMessage = typeof firstError[1] === 'string'
+                            ? firstError[1]
                             : t('validation.invalid', { field: firstError[0] })
                     }
                     else if (typeof apiError.detail === 'string' && !Array.isArray(apiError.detail)) {
@@ -184,7 +183,7 @@ export default function HostsPage() {
             }
 
             // Show error message in toast with field name if available
-            const toastMessage = errorField 
+            const toastMessage = errorField
                 ? `${errorField}: ${errorMessage}`
                 : errorMessage
             toast.error(toastMessage)
@@ -199,7 +198,7 @@ export default function HostsPage() {
 
     return (
         <div className="pb-8 flex flex-col gap-2 w-full items-start">
-            <div className="w-full transform-gpu animate-fade-in" style={{animationDuration: '400ms'}}>
+            <div className="w-full" style={{animationDuration: '400ms'}}>
                 <PageHeader title="hosts" description="manageHosts" buttonIcon={Plus} buttonText="hostsDialog.addHost"
                             onButtonClick={handleCreateClick}/>
                 <Separator/>

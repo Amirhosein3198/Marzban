@@ -1,37 +1,32 @@
-import DashboardStatistics from '@/components/dashboard/DashboardStatistics'
-import UserModal from '@/components/dialogs/UserModal'
-import GroupModal from '@/components/dialogs/GroupModal'
-import HostModal from '@/components/dialogs/HostModal'
-import NodeModal from '@/components/dialogs/NodeModal'
-import AdminModal from '@/components/dialogs/AdminModal'
-import UserTemplateModal from '@/components/dialogs/UserTemplateModal'
-import QuickActionsModal from '@/components/dialogs/ShortcutsModal'
-import { Separator } from '@/components/ui/separator'
-import { Bookmark, UserRound, UserCog, ChevronDown, Check, Sigma } from 'lucide-react'
-import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react'
-import { useForm } from 'react-hook-form'
-import { UseEditFormValues, UseFormValues, UserFormDefaultValues } from './_dashboard.users'
-import { useQueryClient } from '@tanstack/react-query'
-import { useGetCurrentAdmin, useGetSystemStats, useGetAdmins } from '@/service/api'
 import AdminStatisticsCard from '@/components/dashboard/admin-statistics-card'
-import { Button } from '@/components/ui/button'
-import { useTranslation } from 'react-i18next'
-import { groupFormSchema, GroupFormValues } from '@/components/dialogs/GroupModal'
-import { nodeFormSchema, NodeFormValues } from '@/components/dialogs/NodeModal'
-import { adminFormSchema, AdminFormValues } from '@/components/dialogs/AdminModal'
-import { userTemplateFormSchema, UserTemplatesFromValue } from '@/components/dialogs/UserTemplateModal'
+import DashboardStatistics from '@/components/dashboard/DashboardStatistics'
+import AdminModal, { adminFormSchema, AdminFormValues } from '@/components/dialogs/AdminModal'
 import { coreConfigFormSchema, CoreConfigFormValues } from '@/components/dialogs/CoreConfigModal'
+import GroupModal, { groupFormSchema, GroupFormValues } from '@/components/dialogs/GroupModal'
+import HostModal from '@/components/dialogs/HostModal'
+import NodeModal, { nodeFormSchema, NodeFormValues } from '@/components/dialogs/NodeModal'
+import QuickActionsModal from '@/components/dialogs/ShortcutsModal'
+import UserModal from '@/components/dialogs/UserModal'
+import UserTemplateModal, { userTemplateFormSchema, UserTemplatesFromValue } from '@/components/dialogs/UserTemplateModal'
 import { HostFormValues } from '@/components/hosts/Hosts'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from 'sonner'
-import useDirDetection from '@/hooks/use-dir-detection'
-import { Command, CommandInput, CommandList, CommandItem, CommandEmpty } from '@/components/ui/command'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from '@/components/ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Separator } from '@/components/ui/separator'
+import useDirDetection from '@/hooks/use-dir-detection'
 import { cn } from '@/lib/utils'
 import type { AdminDetails } from '@/service/api'
-import { Loader2 } from 'lucide-react'
+import { useGetAdmins, useGetCurrentAdmin, useGetSystemStats } from '@/service/api'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useQueryClient } from '@tanstack/react-query'
 import { debounce } from 'es-toolkit'
+import { Bookmark, Check, ChevronDown, Loader2, Sigma, UserCog, UserRound } from 'lucide-react'
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
+import { UseEditFormValues, UseFormValues, UserFormDefaultValues } from './_dashboard.users'
 
 // Lazy load CoreConfigModal to prevent Monaco Editor from loading until needed
 const CoreConfigModal = lazy(() => import('@/components/dialogs/CoreConfigModal'))
@@ -339,7 +334,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex w-full flex-col items-start gap-2">
-      <div className="w-full transform-gpu animate-fade-in" style={{ animationDuration: '400ms' }}>
+      <div className="w-full" style={{ animationDuration: '400ms' }}>
         <div className="w-full mx-auto py-3 md:py-4 lg:pt-6 gap-2 sm:gap-4 flex items-start justify-between flex-row px-3 sm:px-4">
           <div className="flex flex-col gap-y-1 flex-1 min-w-0 pr-2 sm:pr-0">
             <h1 className="font-medium text-base sm:text-lg lg:text-xl truncate">{t('dashboard')}</h1>
@@ -360,11 +355,11 @@ const Dashboard = () => {
 
       <div className="w-full px-3 sm:px-4 pt-2">
         <div className="flex flex-col gap-4 sm:gap-6">
-          <div className="transform-gpu animate-slide-up" style={{ animationDuration: '500ms', animationDelay: '100ms', animationFillMode: 'both' }}>
+          <div style={{ animationDuration: '500ms', animationDelay: '100ms', animationFillMode: 'both' }}>
             <DashboardStatistics systemData={systemStatsData} />
           </div>
           <Separator className="my-4" />
-          <div className="transform-gpu animate-slide-up" style={{ animationDuration: '500ms', animationDelay: '250ms', animationFillMode: 'both' }}>
+          <div style={{ animationDuration: '500ms', animationDelay: '250ms', animationFillMode: 'both' }}>
             {is_sudo ? (
               <>
                 {/* Admin Switcher for Sudo */}

@@ -1,27 +1,27 @@
 import PageHeader from '@/components/page-header'
 import MainContent from '@/components/statistics/Statistics'
-import { Separator } from '@/components/ui/separator'
+import { Card, CardContent } from '@/components/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { getGetSystemStatsQueryKey, getSystemStats, useGetNodes, NodeResponse } from '@/service/api'
+import { Separator } from '@/components/ui/separator'
+import { Skeleton } from '@/components/ui/skeleton'
+import { getGetSystemStatsQueryKey, getSystemStats, NodeResponse, useGetNodes } from '@/service/api'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Card, CardContent } from '@/components/ui/card'
 
 const Statistics = () => {
   const { t } = useTranslation()
   const [selectedServer, setSelectedServer] = useState<string>('master')
-  
 
-  
+
+
   // Fetch nodes for the selector
   const { data: nodesData, isLoading: isLoadingNodes } = useGetNodes(undefined, {
     query: {
       enabled: true,
     },
   })
-  
+
   // Use the getSystemStats API with proper query key and refetch interval
   const { data, error, isLoading } = useQuery({
     queryKey: getGetSystemStatsQueryKey(),
@@ -34,14 +34,14 @@ const Statistics = () => {
 
   return (
     <div className="flex flex-col gap-2 w-full items-start">
-      <div className="w-full transform-gpu animate-fade-in" style={{ animationDuration: '400ms' }}>
+      <div className="w-full" style={{ animationDuration: '400ms' }}>
         <PageHeader title="statistics" description="monitorServers" />
         <Separator />
       </div>
 
       {/* Node Selector at the top */}
       <div className="w-full px-3 sm:px-4 pt-3 sm:pt-4">
-        <div className="transform-gpu animate-slide-up" style={{ animationDuration: '500ms', animationDelay: '50ms', animationFillMode: 'both' }}>
+        <div style={{ animationDuration: '500ms', animationDelay: '50ms', animationFillMode: 'both' }}>
           <Card>
             <CardContent className="p-4 sm:p-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
@@ -78,13 +78,13 @@ const Statistics = () => {
 
       <div className="w-full">
         <div className="px-3 sm:px-4 w-full pt-2">
-          <div className="transform-gpu animate-slide-up" style={{ animationDuration: '500ms', animationDelay: '100ms', animationFillMode: 'both' }}>
+          <div style={{ animationDuration: '500ms', animationDelay: '100ms', animationFillMode: 'both' }}>
             <Card>
               <CardContent className="p-4 sm:p-6">
-                <MainContent 
-                  error={error} 
-                  isLoading={isLoading} 
-                  data={data} 
+                <MainContent
+                  error={error}
+                  isLoading={isLoading}
+                  data={data}
                   selectedServer={selectedServer}
                   is_sudo={true}
                 />

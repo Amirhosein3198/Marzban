@@ -1,15 +1,15 @@
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import React, { useState, useCallback, useMemo } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import useDirDetection from '@/hooks/use-dir-detection'
 import { cn } from '@/lib/utils'
 import { UserResponse } from '@/service/api'
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { ChevronDown, LoaderCircle, Rss } from 'lucide-react'
+import React, { useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import ActionButtons from '../ActionButtons'
 import { OnlineStatus } from '../OnlineStatus'
 import { StatusBadge } from '../StatusBadge'
 import UsageSliderCompact from '../UsageSliderCompact'
-import { useTranslation } from 'react-i18next'
 
 interface DataTableProps<TData extends UserResponse, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -149,13 +149,8 @@ export function DataTable<TData extends UserResponse, TValue>({ columns, data, i
                 <TableRow
                   className={cn(
                     'cursor-pointer md:cursor-default border-b hover:!bg-inherit md:hover:!bg-muted/50',
-                    expandedRow === row.original.id && 'border-transparent',
-                    index >= visibleRows && 'opacity-0',
-                    'transition-all duration-300 ease-in-out'
+                    expandedRow === row.original.id && 'border-transparent'
                   )}
-                  style={{
-                    transform: index >= visibleRows ? 'translateY(10px)' : 'translateY(0)',
-                  }}
                   onClick={e => handleEditModal(e, row.original)}
                   data-state={row.getIsSelected() && 'selected'}
                 >
@@ -190,15 +185,10 @@ export function DataTable<TData extends UserResponse, TValue>({ columns, data, i
                   ))}
                 </TableRow>
                 {expandedRow === row.original.id && (
-                  <TableRow 
+                  <TableRow
                     className={cn(
-                      "md:hidden border-b hover:!bg-inherit",
-                      index >= visibleRows && 'opacity-0',
-                      'transition-all duration-300 ease-in-out'
+                      "md:hidden border-b hover:!bg-inherit"
                     )}
-                    style={{
-                      transform: index >= visibleRows ? 'translateY(10px)' : 'translateY(0)',
-                    }}
                   >
                     <TableCell colSpan={columns.length} className="p-0 text-sm">
                       <ExpandedRowContent row={row} />

@@ -1,11 +1,11 @@
 import { Card, CardContent } from '@/components/ui/card'
-import { SystemStats, NodeRealtimeStats } from '@/service/api'
-import { useTranslation } from 'react-i18next'
-import { Cpu, MemoryStick, Database, TrendingUp, TrendingDown } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import useDirDetection from '@/hooks/use-dir-detection'
+import { cn } from '@/lib/utils'
+import { NodeRealtimeStats, SystemStats } from '@/service/api'
 import { formatBytes } from '@/utils/formatByte'
+import { Cpu, Database, MemoryStick, TrendingDown, TrendingUp } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface SystemStatisticsSectionProps {
   currentStats?: SystemStats | NodeRealtimeStats | null
@@ -49,7 +49,7 @@ export default function SystemStatisticsSection({ currentStats }: SystemStatisti
 
   const getTotalTrafficValue = () => {
     if (!currentStats) return 0
-    
+
     if ('incoming_bandwidth' in currentStats && 'outgoing_bandwidth' in currentStats) {
       // Master server stats - use total traffic
       const stats = currentStats as SystemStats
@@ -60,34 +60,34 @@ export default function SystemStatisticsSection({ currentStats }: SystemStatisti
       const stats = currentStats as NodeRealtimeStats
       return Number(stats.incoming_bandwidth_speed) + Number(stats.outgoing_bandwidth_speed)
     }
-    
+
     return 0
   }
 
   const getMemoryUsage = () => {
     if (!currentStats) return { used: 0, total: 0, percentage: 0 }
-    
+
     const memUsed = Number(currentStats.mem_used) || 0
     const memTotal = Number(currentStats.mem_total) || 0
     const percentage = memTotal > 0 ? (memUsed / memTotal) * 100 : 0
-    
+
     return { used: memUsed, total: memTotal, percentage }
   }
 
   const getCpuInfo = () => {
     if (!currentStats) return { usage: 0, cores: 0 }
-    
+
     let cpuUsage = Number(currentStats.cpu_usage) || 0
     const cpuCores = Number(currentStats.cpu_cores) || 0
-    
+
     // Fix potential decimal issue - if usage is between 0-1, it's likely a decimal representation
     if (cpuUsage > 0 && cpuUsage <= 1) {
       cpuUsage = cpuUsage * 100
     }
-    
+
     // Ensure CPU usage doesn't exceed 100% and is reasonable
     cpuUsage = Math.min(Math.max(cpuUsage, 0), 100)
-    
+
     return { usage: Math.round(cpuUsage * 10) / 10, cores: cpuCores } // Round to 1 decimal place
   }
 
@@ -118,7 +118,7 @@ export default function SystemStatisticsSection({ currentStats }: SystemStatisti
       'auto-rows-fr',
     )}>
       {/* CPU Usage */}
-      <div className="w-full h-full animate-fade-in" style={{ animationDuration: '600ms', animationDelay: '50ms' }}>
+      <div className="w-full h-full " style={{ animationDuration: '600ms', animationDelay: '50ms' }}>
         <Card dir={dir} className="group relative w-full h-full overflow-hidden rounded-lg border transition-all duration-300 hover:shadow-lg">
           <div
             className={cn(
@@ -138,7 +138,7 @@ export default function SystemStatisticsSection({ currentStats }: SystemStatisti
                 </div>
               </div>
             </div>
-            
+
             <div className="flex items-end justify-between gap-2">
               <div className="flex items-center gap-1 sm:gap-2 min-w-0 flex-1">
                 <span dir="ltr" className={cn('text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-500 truncate', isIncreased.cpu_usage ? 'animate-zoom-out' : '')} style={{ animationDuration: '400ms' }}>
@@ -150,7 +150,7 @@ export default function SystemStatisticsSection({ currentStats }: SystemStatisti
                   </div>
                 )}
               </div>
-              
+
               {cpu.cores > 0 && (
                 <div className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground bg-muted/50 px-1.5 sm:px-2 py-1 rounded-md shrink-0">
                   <Cpu className="h-3 w-3" />
@@ -165,7 +165,7 @@ export default function SystemStatisticsSection({ currentStats }: SystemStatisti
       </div>
 
       {/* Memory Usage */}
-      <div className="w-full h-full animate-fade-in" style={{ animationDuration: '600ms', animationDelay: '150ms' }}>
+      <div className="w-full h-full " style={{ animationDuration: '600ms', animationDelay: '150ms' }}>
         <Card dir={dir} className="group relative w-full h-full overflow-hidden rounded-lg border transition-all duration-300 hover:shadow-lg">
           <div
             className={cn(
@@ -185,7 +185,7 @@ export default function SystemStatisticsSection({ currentStats }: SystemStatisti
                 </div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-1 sm:gap-2">
               <span dir="ltr" className={cn('text-lg sm:text-xl lg:text-2xl font-bold transition-all duration-500 truncate', isIncreased.mem_usage ? 'animate-zoom-out' : '')} style={{ animationDuration: '400ms' }}>
                 {currentStats ? (
@@ -207,7 +207,7 @@ export default function SystemStatisticsSection({ currentStats }: SystemStatisti
       </div>
 
       {/* Total Traffic */}
-      <div className="w-full h-full animate-fade-in col-span-1 sm:col-span-2 lg:col-span-1" style={{ animationDuration: '600ms', animationDelay: '250ms' }}>
+      <div className="w-full h-full  col-span-1 sm:col-span-2 lg:col-span-1" style={{ animationDuration: '600ms', animationDelay: '250ms' }}>
         <Card dir={dir} className="group relative w-full h-full overflow-hidden rounded-lg border transition-all duration-300 hover:shadow-lg">
           <div
             className={cn(
@@ -227,7 +227,7 @@ export default function SystemStatisticsSection({ currentStats }: SystemStatisti
                 </div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-1 sm:gap-2">
               <span dir="ltr" className={cn('text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-500 truncate', isIncreased.total_traffic ? 'animate-zoom-out' : '')} style={{ animationDuration: '400ms' }}>
                 {formatBytes(getTotalTrafficValue() || 0, 1)}
@@ -243,4 +243,4 @@ export default function SystemStatisticsSection({ currentStats }: SystemStatisti
       </div>
     </div>
   )
-} 
+}

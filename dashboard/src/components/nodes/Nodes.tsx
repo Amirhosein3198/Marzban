@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import NodeModal, { nodeFormSchema, NodeFormValues } from '@/components/dialogs/NodeModal'
 import Node from '@/components/nodes/Node'
-import { useGetNodes, useModifyNode, NodeResponse, NodeConnectionType } from '@/service/api'
-import { toast } from 'sonner'
+import { NodeConnectionType, NodeResponse, useGetNodes, useModifyNode } from '@/service/api'
 import { queryClient } from '@/utils/query-client'
-import NodeModal from '@/components/dialogs/NodeModal'
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { nodeFormSchema, NodeFormValues } from '@/components/dialogs/NodeModal'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 
 const initialDefaultValues: Partial<NodeFormValues> = {
   name: '',
@@ -105,7 +104,7 @@ export default function Nodes() {
     <div className="flex flex-col gap-2 w-full items-start">
       <div className="flex-1 space-y-4 pt-6 w-full">
         <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12 transform-gpu animate-slide-up"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12 transform-gpu "
           style={{ animationDuration: '500ms', animationDelay: '100ms', animationFillMode: 'both' }}
         >
           {nodesData?.map(node => <Node key={node.id} node={node} onEdit={handleEdit} onToggleStatus={handleToggleStatus} />)}

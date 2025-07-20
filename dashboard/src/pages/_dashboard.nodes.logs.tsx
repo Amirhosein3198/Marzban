@@ -1,21 +1,21 @@
-import { useTranslation } from 'react-i18next'
-import { Card, CardContent } from '@/components/ui/card'
-import { useEffect, useState, useRef, useMemo, useCallback } from 'react'
-import { useGetNodes } from '@/service/api'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Label } from '@/components/ui/label'
-import { getAuthToken } from '@/utils/authStorage'
-import { EventSource } from 'eventsource'
-import { ChevronDown, ArrowDown, Terminal, Clock, Search, ArrowDownCircle, FilterIcon, XIcon, DatabaseIcon, InfinityIcon, AlertTriangleIcon } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Switch } from '@/components/ui/switch'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuCheckboxItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Label } from '@/components/ui/label'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import useDirDetection from '@/hooks/use-dir-detection'
 import { cn } from '@/lib/utils'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { useGetNodes } from '@/service/api'
+import { getAuthToken } from '@/utils/authStorage'
+import { EventSource } from 'eventsource'
+import { AlertTriangleIcon, ArrowDown, ArrowDownCircle, ChevronDown, Clock, DatabaseIcon, FilterIcon, InfinityIcon, Search, Terminal, XIcon } from 'lucide-react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 // define EventSource globally
 globalThis.EventSource = EventSource
@@ -286,13 +286,13 @@ export default function NodeLogs() {
     }
 
     const container = logsContainerRef.current
-    
+
     if (autoScroll) {
       // If auto-scroll is enabled, always scroll to bottom immediately
       container.scrollTop = container.scrollHeight
       lastScrollTopRef.current = container.scrollHeight
       wasAtBottomRef.current = true
-      
+
       // Update visible window for windowed rendering
       if (filteredLogs.length > 0) {
         const maxStartIndex = Math.max(0, filteredLogs.length - visibleItemsCount)
@@ -301,17 +301,17 @@ export default function NodeLogs() {
     } else {
       // Auto-scroll is OFF - force maintain exact position
       const savedScrollTop = lastScrollTopRef.current
-      
+
       // Use multiple methods to ensure position is maintained
       container.scrollTop = savedScrollTop
-      
+
       // Double-check with requestAnimationFrame
       requestAnimationFrame(() => {
         if (container && container.scrollTop !== savedScrollTop) {
           container.scrollTop = savedScrollTop
         }
       })
-      
+
       // Triple-check with setTimeout as fallback
       setTimeout(() => {
         if (container && container.scrollTop !== savedScrollTop) {
@@ -329,18 +329,18 @@ export default function NodeLogs() {
     const scrollTop = container.scrollTop
     const scrollHeight = container.scrollHeight
     const clientHeight = container.clientHeight
-    
+
     // Always update last scroll position when user manually scrolls
     lastScrollTopRef.current = scrollTop
-    
+
     // Calculate visible start index for windowed rendering
     const firstVisibleIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - bufferSize)
     setVisibleStartIndex(firstVisibleIndex)
-    
+
     // Check if user is at the bottom
     const isAtBottom = scrollHeight - scrollTop - clientHeight <= 5
     wasAtBottomRef.current = isAtBottom
-    
+
     // Auto-disable auto-scroll only if user deliberately scrolls up
     if (autoScroll && !isAtBottom) {
       setAutoScroll(false)
@@ -350,15 +350,15 @@ export default function NodeLogs() {
   const scrollToBottom = () => {
     if (logsContainerRef.current) {
       const container = logsContainerRef.current
-      
+
       // Immediately scroll to bottom
       container.scrollTop = container.scrollHeight
       lastScrollTopRef.current = container.scrollHeight
       wasAtBottomRef.current = true
-      
+
       // Enable auto-scroll
       setAutoScroll(true)
-      
+
       // Update visible window
       if (filteredLogs.length > 0) {
         const maxStartIndex = Math.max(0, filteredLogs.length - visibleItemsCount)
@@ -385,7 +385,7 @@ export default function NodeLogs() {
       container.scrollTop = container.scrollHeight
       lastScrollTopRef.current = container.scrollHeight
       wasAtBottomRef.current = true
-      
+
       if (filteredLogs.length > 0) {
         const maxStartIndex = Math.max(0, filteredLogs.length - visibleItemsCount)
         setVisibleStartIndex(maxStartIndex)
@@ -642,7 +642,7 @@ export default function NodeLogs() {
           </div>
         </div>
 
-        <Card className="transform-gpu animate-slide-up" style={{ animationDuration: '500ms', animationFillMode: 'both' }}>
+        <Card style={{ animationDuration: '500ms', animationFillMode: 'both' }}>
           <CardContent dir="ltr" className="p-4">
             <div className="h-[600px] w-full rounded-md overflow-auto" ref={logsContainerRef} onScroll={handleScroll}>
               <div className="p-1">

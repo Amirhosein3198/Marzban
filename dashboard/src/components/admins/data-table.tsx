@@ -1,15 +1,15 @@
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { cn } from '@/lib/utils.ts'
-import useDirDetection from '@/hooks/use-dir-detection.tsx'
-import React, { useState, useMemo, useEffect } from 'react'
-import { ChevronDown, Edit2, Power, PowerOff, RefreshCw, Trash2, User, UserRound, LoaderCircle } from 'lucide-react'
-import { Button } from '@/components/ui/button.tsx'
-import { AdminDetails } from '@/service/api'
-import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/ui/badge.tsx'
+import { Button } from '@/components/ui/button.tsx'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { statusColors } from '@/constants/UserSettings.ts'
+import useDirDetection from '@/hooks/use-dir-detection.tsx'
 import { useIsMobile } from '@/hooks/use-mobile.tsx'
+import { cn } from '@/lib/utils.ts'
+import { AdminDetails } from '@/service/api'
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { ChevronDown, Edit2, LoaderCircle, Power, PowerOff, RefreshCw, Trash2, User, UserRound } from 'lucide-react'
+import React, { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface DataTableProps<TData extends AdminDetails> {
   columns: ColumnDef<TData, any>[]
@@ -81,7 +81,6 @@ const ExpandedRowContent = ({
 export function DataTable<TData extends AdminDetails>({ columns, data, onEdit, onDelete, onToggleStatus, onResetUsage, isLoading = false, isFetching = false }: DataTableProps<TData>) {
   const [expandedRow, setExpandedRow] = useState<string | null>(null)
   const { t } = useTranslation()
-  const [visibleRows, setVisibleRows] = useState<number>(0)
   const table = useReactTable({
     data,
     columns,
@@ -91,25 +90,6 @@ export function DataTable<TData extends AdminDetails>({ columns, data, onEdit, o
   const isRTL = dir === 'rtl'
   const isLoadingData = isLoading || isFetching
 
-  useEffect(() => {
-    if (isLoading || isFetching) {
-      setVisibleRows(0)
-      return
-    }
-
-    const totalRows = table.getRowModel().rows.length
-    let currentRow = 0
-
-    const loadNextRow = () => {
-      if (currentRow < totalRows) {
-        setVisibleRows(prev => prev + 1)
-        currentRow++
-        setTimeout(loadNextRow, 50)
-      }
-    }
-
-    loadNextRow()
-  }, [isLoading, isFetching, table.getRowModel().rows.length])
 
   const LoadingState = useMemo(() => (
     <TableRow>
@@ -176,13 +156,7 @@ export function DataTable<TData extends AdminDetails>({ columns, data, onEdit, o
                 <TableRow
                   className={cn(
                     'cursor-pointer md:cursor-default border-b hover:!bg-inherit md:hover:!bg-muted/50',
-                    expandedRow === row.id && 'border-transparent',
-                    index >= visibleRows && 'opacity-0',
-                    'transition-all duration-300 ease-in-out'
                   )}
-                  style={{
-                    transform: index >= visibleRows ? 'translateY(10px)' : 'translateY(0)',
-                  }}
                   onClick={() => window.innerWidth < 768 && handleRowToggle(row.id)}
                   data-state={row.getIsSelected() && 'selected'}
                 >
@@ -213,15 +187,10 @@ export function DataTable<TData extends AdminDetails>({ columns, data, onEdit, o
                   ))}
                 </TableRow>
                 {expandedRow === row.id && (
-                  <TableRow 
+                  <TableRow
                     className={cn(
-                      "md:hidden border-b hover:!bg-inherit",
-                      index >= visibleRows && 'opacity-0',
-                      'transition-all duration-300 ease-in-out'
+                      "md:hidden border-b hover:!bg-inherit"
                     )}
-                    style={{
-                      transform: index >= visibleRows ? 'translateY(10px)' : 'translateY(0)',
-                    }}
                   >
                     <TableCell colSpan={columns.length} className="p-0 text-sm">
                       <ExpandedRowContent
