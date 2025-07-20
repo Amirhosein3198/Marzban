@@ -5,37 +5,37 @@ import { NavMain } from '@/components/nav-main'
 import { NavSecondary } from '@/components/nav-secondary'
 import { NavUser } from '@/components/nav-user'
 import { ThemeToggle } from '@/components/theme-toggle'
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail, SidebarTrigger, useSidebar } from '@/components/ui/sidebar'
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarTrigger, useSidebar } from '@/components/ui/sidebar'
 import { DISCUSSION_GROUP, DOCUMENTATION, DONATION_URL, REPO_URL } from '@/constants/Project'
 import { useAdmin } from '@/hooks/use-admin'
 import useDirDetection from '@/hooks/use-dir-detection'
 import { getSystemStats } from '@/service/api'
 import {
-  ArrowUpDown,
-  Bell,
-  BookOpen,
-  Calendar,
-  Cpu,
-  Database,
-  FileText,
-  GithubIcon,
-  Layers,
-  LayoutDashboardIcon,
-  LayoutTemplate,
-  LifeBuoy,
-  ListTodo,
-  Lock,
-  MessageCircle,
-  Palette,
-  PieChart,
-  RssIcon,
-  Send,
-  Settings2,
-  Share2Icon,
-  UserCog,
-  Users2,
-  UsersIcon,
-  Webhook,
+	ArrowUpDown,
+	Bell,
+	BookOpen,
+	Calendar,
+	Cpu,
+	Database,
+	FileText,
+	GithubIcon,
+	Layers,
+	LayoutDashboardIcon,
+	LayoutTemplate,
+	LifeBuoy,
+	ListTodo,
+	Lock,
+	MessageCircle,
+	Palette,
+	PieChart,
+	RssIcon,
+	Send,
+	Settings2,
+	Share2Icon,
+	UserCog,
+	Users2,
+	UsersIcon,
+	Webhook,
 } from 'lucide-react'
 import * as React from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -301,7 +301,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarTrigger />
       </div>
       <Sidebar variant="sidebar" {...props} className="border-sidebar-border p-0" side={isRTL ? 'right' : 'left'}>
-        <SidebarRail />
+        {/* <SidebarRail /> */}
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
